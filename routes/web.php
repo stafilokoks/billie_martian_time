@@ -15,4 +15,4 @@ $router->get('/', function () use ($router) {
     return 'Billie UTC to Martian time converter. Please use POST "/time" request. ';
 });
 
-$router->post('/time', ['uses' => 'TimeController@ConvertTime']);
+$router->get('/convert', ['uses' => 'TimeController@ConvertTime']);
