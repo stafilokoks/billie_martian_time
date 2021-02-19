@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\TimeConverterService;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -33,8 +34,13 @@ class TimeController extends Controller
             'date' => 'required|date_format:Y-m-d\TH:i:s\Z',
         ]);
 
-        return response()->json(
-            $this->converter->convert(Carbon::createFromTimeString($validatedData['date']))
-        );
+        try{
+            return response()->json(
+                $this->converter->convert(Carbon::createFromTimeString($validatedData['date']))
+            );
+        }catch (ConnectionException $e){
+            return response()->json(['Error' => 'Leap seconds service is unavailable'], 503);
+        }
+
     }
 }

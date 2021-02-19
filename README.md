@@ -23,6 +23,4 @@ Will return converted date and time
 date - UTC date in ISO-8601 format. 
 
 ## Leap seconds
-Because we don't know how much leap seconds will be added in 2121, this application use predefined seconds amount. 
-But LeapSecondsService are provided space in code for future realisation of a date related leap seconds calculation 
-or loading.
+Date from https://www.ietf.org/timezones/data/leap-seconds.list is used as source of leap seconds

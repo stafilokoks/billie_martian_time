@@ -11,7 +11,7 @@ class TimeControllerTest extends TestCase
     public function testGetConvertPass()
     {
         $this->get('/convert?date=2000-01-06T00:00:00Z')
-            ->seeJson(['MSD' => 44795, 'MTC' => '23:59:44']);
+            ->seeJson(['MSD' => 44795, 'MTC' => '23:59:39']);
     }
 
     public function testGetConvertFail()

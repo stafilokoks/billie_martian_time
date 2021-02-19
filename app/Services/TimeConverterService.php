@@ -25,6 +25,7 @@ class TimeConverterService
     /**
      * @param Carbon $date
      * @return array
+     * @throws \Illuminate\Http\Client\ConnectionException
      */
     public function convert(Carbon $date) : array
     {
@@ -40,11 +41,14 @@ class TimeConverterService
     /**
      * @param Carbon $date
      * @return float
+     * @throws \Illuminate\Http\Client\ConnectionException
      */
     private function getSols(Carbon $date) : float
     {
+        $leapSeconds = $this->leapSecondsService->forDate($date);
+
         $jDateUT = ( $date->getPreciseTimestamp(3) / 86400000 ) + 2440587.5;
-        $jDateTT = $jDateUT + ($this->leapSecondsService->forDate($date) / 86400);
+        $jDateTT = $jDateUT + ($leapSeconds / 86400);
 
         //Days since J2000
         $dTj2000 = $jDateTT - 2451545;

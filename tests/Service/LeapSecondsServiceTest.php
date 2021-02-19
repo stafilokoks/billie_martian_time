@@ -8,13 +8,11 @@ class LeapSecondsServiceTest extends TestCase
 {
     public function testLeapSecondsService()
     {
-        // Right now LeapSecondsProvider just return static value
-        // of leap seconds of the 2021 year, so date we send can be any.
         $leapSecondsService = new LeapSecondsService();
 
         $this->assertEquals(
-            $leapSecondsService->forDate(new Carbon()),
-            69.184
+            $leapSecondsService->forDate(new Carbon('2000-01-06T00:00:00Z')),
+            64.184
         );
     }
 }
